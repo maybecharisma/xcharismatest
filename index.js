@@ -498,7 +498,7 @@ bot.on("message", async message => {
 
           break;
   }
-});
+
   
 
 bot.login(process.env.BOT_TOKEN);
