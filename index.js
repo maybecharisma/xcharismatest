@@ -61,7 +61,7 @@ function play(connection, message){
     var server = servers[message.guild.id];
 
     const streamOptions = { volume : 0.50}
-    const stream = YTDL(server.queue[0], {filter: "audioonly"});
+    const stream = YTDL(server.queue[0], {filter: "audioonly"
 
     server.dispatcher = connection.playStream(stream, streamOptions);
 
@@ -72,7 +72,7 @@ function play(connection, message){
     if(server.queue[0] != undefined)
       getYTinfo(server.queue[0], function(res){
         NEXT_PLAYING = res.title;
-      });
+     
     else
       NEXT_PLAYING = "Nothing";
 
@@ -83,7 +83,7 @@ function play(connection, message){
           NOW_PLAYING = "Nothing";
         }
 
-    });
+    
 }
 
 function getYTinfo(yturl, response) {
@@ -122,7 +122,7 @@ function getYTinfo(yturl, response) {
         return_data['duration'] = dur;
 
         response(return_data);
-    });
+    
 }
 
 var bot = new Discord.Client();
@@ -145,7 +145,7 @@ fs.readdir("./commands/", (err, files) => {
     let props = require(`./commands/${f}`);
     console.log(`${i + 1}: ${f} loaded!`)
     bot.commands.set(props.help.name, props);
-  });
+  
 
 })
 
@@ -155,12 +155,12 @@ bot.on("guildMemberAdd", function(member) {
   member.addRole(member.guild.roles.find("name", "Members")).then(() => {
     console.log("joined and has been given The Member Role");
   })
-});
+
 
 bot.on("guildMemberRemove", function(member){
   member.guild.channels.find("name", "general").send(`Goodbye!` + member.toString());
 
-});
+
 
 bot.on("ready", async () => {
 
@@ -178,7 +178,7 @@ bot.on("ready", async () => {
       .setColor(GenerateHex());
   
   channel.send(ONLINE);
-});
+
 
 var con = mysql.createConnection({
   host: file.SQL_host,
@@ -187,13 +187,13 @@ var con = mysql.createConnection({
   password: file.SQL_password,
   database: file.SQL_database
 
-});
+
 
 con.connect(err => {
   if(err) throw err;
   console.log(GreenStyle("Connected to database!"));
   
-});
+
 
 bot.on("message", async message => {
 
@@ -222,7 +222,7 @@ bot.on("message", async message => {
     }
 
     con.query(sql);
-  });
+  
 
   con.query(`SELECT * FROM messagecount WHERE id = '${message.author.id}'`, (err, rows) => {
     if(err) throw err;
@@ -237,7 +237,7 @@ bot.on("message", async message => {
     }
 
     con.query(sql)
-  });
+  
 
   var prefix = (file.prefix[message.guild.id] == undefined) ? file.prefix["default"] : file.prefix[message.guild.id];
 
@@ -339,7 +339,7 @@ bot.on("message", async message => {
 
         message.channel.send(":white_check_mark: " + "| Added " + song + " song to the queue!");
           play(connection, message);
-       });
+       
     }
 
       break;
@@ -372,11 +372,10 @@ bot.on("message", async message => {
             fs.writeFile(settings, JSON.stringify(file, null, 2), function (err) {
 
               message.channel.send(":white_check_mark: " + "| The NEW Prefix for this bot is: " + prefix_val);
-            });
 
           } else {
             return message.reply(":x: " + "| You need to have the \"ADMINISTRATOR\" Permission").then(() => {
-            });
+            
           }
       break;
 
@@ -391,7 +390,7 @@ bot.on("message", async message => {
           if(server.queue[0] != undefined)
             getYTinfo(server.queue[0], function(res){
               NEXT_PLAYING = res.title;
-            });
+            
           else
             NEXT_PLAYING = "Nothing";
 
@@ -415,7 +414,7 @@ bot.on("message", async message => {
 
                        message.channel.send(np)
 
-            });
+            
           }
 
       break;
@@ -457,7 +456,7 @@ bot.on("message", async message => {
               server.queue.push("https://www.youtube.com/watch?v=" + element.snippet.resourceId.videoId);
 
             }, this);
-          });
+          
 
           if (!message.guild.voiceConnection) message.member.voiceChannel.join().then(function(connection){
               var server = servers[message.guild.id];
@@ -465,7 +464,7 @@ bot.on("message", async message => {
 
               message.channel.send(":white_check_mark: " + "| Added " + songs + " songs to the queue!");
               play(connection, message);
-           });
+           
           break;
 
   case "stop":
