@@ -16,7 +16,6 @@ const configB       = require('./settingsConfig/ConfigBen.json');
 var settings        = './settingsConfig/settings.json';
 var file            = require(settings)
 
-const TOKEN = file.TOKEN;
 const GreenStyle = chalk.green;
 
 function generateXp() {
@@ -500,4 +499,6 @@ bot.on("message", async message => {
           break;
   }
 });
+  
+
 bot.login(process.env.BOT_TOKEN);
