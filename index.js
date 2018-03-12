@@ -26,7 +26,6 @@ var file = require(settings)
 
 // require('console-stamp')(console, '[HH:MM:ss]');
 
-const TOKEN = file.TOKEN;
 const GreenStyle = chalk.green;
 var NOW_PLAYING = "Nothing";
 
@@ -1139,4 +1138,4 @@ bot.on('messageReactionAdd', (reaction, user) => {
 }
 });
 
-client.login(process.env.BOT_TOKEN);
+bot.login(process.env.BOT_TOKEN);
